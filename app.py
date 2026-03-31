@@ -5,15 +5,31 @@ import faiss
 from sentence_transformers import SentenceTransformer
 
 # Load model
-model = SentenceTransformer('all-MiniLM-L6-v2')
+st.write("Loading AI model... please wait ⏳")
+
+@st.cache_resource
+def load_model():
+    return SentenceTransformer('all-MiniLM-L6-v2')
+
+model = load_model()
 
 # Load dataset
-df = pd.read_csv("books.csv")
+@st.cache_data
+def load_data():
+    df = pd.read_csv("books.csv")
+    df["combined_text"] = df["title"] + " by " + df["authors"]
+    return df
+
+df = load_data()
 
 df["combined_text"] = df["title"] + " by " + df["authors"]
 
 # Create embeddings
-embeddings = model.encode(df["combined_text"].tolist())
+@st.cache_data
+def create_embeddings(texts):
+    return model.encode(texts)
+
+embeddings = create_embeddings(df["combined_text"].tolist())
 
 # Build FAISS index
 dimension = embeddings.shape[1]
