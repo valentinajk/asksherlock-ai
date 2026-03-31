@@ -1,0 +1,26 @@
+AskSherlock 
+
+AskSherlock is an AI-powered book recommendation system built using Retrieval Augmented Generation (RAG).
+
+Features
+- Semantic book search
+- Vector similarity using FAISS
+- Embeddings using SentenceTransformers
+- Streamlit web interface
+
+Tech Stack
+- Python
+- SentenceTransformers
+- FAISS
+- Pandas
+- Streamlit
+
+Example Queries
+- dark fantasy magic
+- romantic historical fiction
+- space sci-fi adventure
+
+How to Run
+
+pip install -r requirements.txt
+streamlit run app.py
